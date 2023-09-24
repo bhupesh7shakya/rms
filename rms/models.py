@@ -7,6 +7,9 @@ User=get_user_model()
 class Category(models.Model):
     name = models.CharField(max_length=100)
     
+    def __str__(self) -> str:
+        return self.name
+    
 
 class Food(models.Model):
     name=models.CharField(max_length=100)
@@ -52,3 +55,9 @@ class Order(models.Model):
     user=models.ForeignKey(User,on_delete=models.PROTECT)
     payment_status=models.BooleanField(default=False)
     status=models.CharField(choices=ORDER_STATUS,max_length=2,default=PENDING_STATUS)
+    
+    
+
+class OrderItem(models.Model):
+    food=models.ForeignKey(Food,on_delete=models.PROTECT)
+    order=models.ForeignKey(Order,on_delete=models.CASCADE)
