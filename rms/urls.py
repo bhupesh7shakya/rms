@@ -1,7 +1,11 @@
 from django.contrib import admin
 from django.urls import path
 from . import views
+from rest_framework import routers
+
+router=routers.SimpleRouter()
+router.register('category',views.CategoryViewSet)
+
 urlpatterns = [
-    path('category',views.category_list),
-    path('category/<pk>',views.category_detail),
-]
+ 
+]+router.urls
