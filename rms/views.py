@@ -20,7 +20,22 @@ class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class=CategorySerializer
     
 
+    def destroy(self,request,pk):
+        category=get_object_or_404(Category,pk=pk)
+
+        food=Food.objects.filter(category=category)
+        if food.count()>0:
+            return Response({
+                "detail":"You can't delete data Its is protect "
+            })
+        category.delete()
+        return Response(
+            {"detail":"Data has been deleted"}
+            ,status=status.HTTP_204_NO_CONTENT
+            )
     
 
-
+class FoodViewset(viewsets.ModelViewSet):
+    queryset = Food.objects.all()
+    serializer_class=FoodSerializer
 
