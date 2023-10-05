@@ -24,7 +24,7 @@ class FoodAdmin(admin.ModelAdmin):
     search_fields=('name','category')
     autocomplete_fields=('category',)
     list_filter=('category',)
-    list_per_page=10
+    list_per_page=600
     list_select_related=('category',)
     
     def taxed_price(self,food):

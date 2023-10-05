@@ -20,10 +20,20 @@ class FoodSerializer(serializers.ModelSerializer):
     class Meta:
         model=Food
         fields=(
+            "id",
             "name",
             "price",
             "price_tax",
             "category",
             "category_id",
         )
+        
     
+class TableSerializer(serializers.ModelSerializer):
+    table_number=serializers.SerializerMethodField('get_table_number')
+    class Meta:
+        model=Table
+        fields=("table_number","is_occupied",)
+    
+    def get_table_number(self,table):
+        return table.number
